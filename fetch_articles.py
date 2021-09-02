@@ -174,6 +174,7 @@ if __name__ == "__main__":
 
     start_date_iso = sys.argv[1]
     start_date, end_date = get_date_span(start_date_iso)
+
     print(f"Retrieving results for the month starting on {start_date_iso}")
     pages = asyncio.run(query_all(start_date, end_date))
     print()
