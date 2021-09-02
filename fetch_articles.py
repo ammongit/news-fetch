@@ -24,7 +24,14 @@ import pytz
 
 class CromError(RuntimeError):
     def __init__(self, errors):
-        super().__init__()
+        if len(errors) == 0:
+            error_message = None
+        elif len(errors) == 1:
+            error_message = errors[0]['message']
+        else:
+            error_message = '\n'.join(error['message'] for error in errors)
+
+        super().__init__(error_message)
         self.errors = errors
 
 CROM_ENDPOINT = "https://api.crom.avn.sh/"
