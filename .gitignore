@@ -1,0 +1,23 @@
+# Artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# Editor files
+vscode/
+.*.swp
+*.vs/
+*.sln
+*.pyproj
+*.pyproj.user
+
+# Miscellaneous
+*.bak
+*~
+*#
