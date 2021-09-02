@@ -15,13 +15,13 @@
 import asyncio
 import csv
 import json
-import pytz
 import sys
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from dateutil.parser import isoparse
 
 import aiohttp
+import pytz
 
 class CromError(RuntimeError):
     def __init__(self, errors):
