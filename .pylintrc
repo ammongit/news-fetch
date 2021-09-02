@@ -74,13 +74,7 @@ confidence=
 enable=
 disable=missing-docstring,
         unspecified-encoding,
-        invalid-name,
-        redefined-builtin,
-        no-init,
-        too-many-instance-attributes,
-        too-few-public-methods,
-        too-many-public-methods,
-        no-else-return
+        redefined-outer-name
 
 
 [TYPECHECK]
@@ -164,7 +158,7 @@ callbacks=hook_,cbf_
 bad-functions=print
 
 # Good variable names which should always be accepted, separated by a comma
-good-names=i,j,k,id,_
+good-names=i,j,k,id,r,_
 
 # Bad variable names which should always be refused, separated by a comma
 bad-names=foo,bar,baz,todo,thing
