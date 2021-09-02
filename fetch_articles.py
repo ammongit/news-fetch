@@ -111,12 +111,13 @@ def convert_pages_to_rows(pages):
     keys = [
         'url',
         'category',
-        'created_at',
-        'tags',
         'rating',
         'vote_count',
         'upvote_count',
         'downvote_count',
+        'created_at',
+        'authors',
+        'tags',
         'revisions',
     ]
 
