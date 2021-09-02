@@ -22,3 +22,9 @@ $ ./fetch_articles.py [month]
 
 The `month` parameter should be an ISO date string from the first of the month you wish to fetch.
 So if you want all articles created in March of 2019, you would put `2019-03-01`.
+
+All generated files will be in `output/`. You can clear it out using:
+
+```
+$ ./clean.sh
+```
