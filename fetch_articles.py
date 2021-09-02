@@ -16,7 +16,6 @@ import asyncio
 import csv
 import json
 import sys
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from dateutil.parser import isoparse
 
@@ -115,13 +114,17 @@ def convert_pages_to_rows(pages):
         yield [convert(page[key]) for key in keys]
 
 
-async def query_all(start_date_iso):
+def get_date_span(iso_date):
+    start_date = isoparse(iso_date).replace(tzinfo=pytz.UTC)
+    end_date = start_date + relativedelta(months=+1)
+
+    return start_date, end_date
+
+
+async def query_all(start_date, end_date):
     pages = []
     cursor = None
     has_next_page = True
-
-    start_date = isoparse(start_date_iso).replace(tzinfo=pytz.UTC)
-    end_date = start_date + relativedelta(months=+1)
 
     async with aiohttp.ClientSession() as session:
         while has_next_page:
@@ -170,8 +173,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     start_date_iso = sys.argv[1]
+    start_date, end_date = get_date_span(start_date_iso)
     print(f"Retrieving results for the month starting on {start_date_iso}")
-    pages = asyncio.run(query_all(start_date_iso))
+    pages = asyncio.run(query_all(start_date, end_date))
     print()
 
     file_prefix = f"pages-{start_date_iso}"
