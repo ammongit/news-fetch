@@ -55,7 +55,12 @@ CROM_QUERY_TEMPLATE = """
           rating,
           voteCount,
           revisionCount,
-        }
+        },
+        attributions {
+            type,
+            user { name },
+            isCurrent,
+        },
       }
     },
     pageInfo {
@@ -77,19 +82,27 @@ CROM_HEADERS = {
 def convert_edge_to_page(edge):
     node = edge['node']
     wikidot_info = node['wikidotInfo']
+    attributions = node['attributions']
     rating = wikidot_info['rating']
     vote_count = wikidot_info['voteCount']
     downvote_count = (vote_count - rating) // 2
 
+    authors = [
+        attribution['user']['name']
+        for attribution in attributions
+        if attribution['isCurrent'] and attribution['type'] in ('AUTHOR', 'MAINTAINER', 'SUBMITTER')
+    ]
+
     return {
         'url': node['url'],
         'category': wikidot_info['category'],
-        'created_at': wikidot_info['createdAt'],
-        'tags': wikidot_info['tags'],
         'rating': rating,
         'vote_count': vote_count,
         'upvote_count': rating + downvote_count,
         'downvote_count': downvote_count,
+        'created_at': wikidot_info['createdAt'],
+        'authors': authors,
+        'tags': wikidot_info['tags'],
         'revisions': wikidot_info['revisionCount'],
     }
 
