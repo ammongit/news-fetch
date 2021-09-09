@@ -43,6 +43,7 @@ CROM_QUERY_TEMPLATE = """
       wikidotInfo: { createdAt: { gte: "%(created_at)s" } },
       anyBaseUrl: [ "http://scp-wiki.wikidot.com" ]
     },
+    first: 100,
     after: %(cursor)s
   ) {
     edges {
